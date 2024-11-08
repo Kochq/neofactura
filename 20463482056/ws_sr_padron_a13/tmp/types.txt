@@ -1,0 +1,84 @@
+Array
+(
+    [0] => struct dummy {
+}
+    [1] => struct dummyResponse {
+ dummyReturn return;
+}
+    [2] => struct dummyReturn {
+ string appserver;
+ string authserver;
+ string dbserver;
+}
+    [3] => struct getIdPersonaListByDocumento {
+ string token;
+ string sign;
+ long cuitRepresentada;
+ string documento;
+}
+    [4] => struct getIdPersonaListByDocumentoResponse {
+ idPersonaListReturn idPersonaListReturn;
+}
+    [5] => struct idPersonaListReturn {
+ long idPersona;
+ metadata metadata;
+}
+    [6] => struct metadata {
+ dateTime fechaHora;
+ string servidor;
+}
+    [7] => struct getPersona {
+ string token;
+ string sign;
+ long cuitRepresentada;
+ long idPersona;
+}
+    [8] => struct getPersonaResponse {
+ personaReturn personaReturn;
+}
+    [9] => struct personaReturn {
+ metadata metadata;
+ persona persona;
+}
+    [10] => struct persona {
+ string apellido;
+ long claveInactivaAsociada;
+ string descripcionActividadPrincipal;
+ domicilio domicilio;
+ string estadoClave;
+ dateTime fechaContratoSocial;
+ dateTime fechaFallecimiento;
+ dateTime fechaNacimiento;
+ string formaJuridica;
+ long idActividadPrincipal;
+ long idPersona;
+ int mesCierre;
+ string nombre;
+ string numeroDocumento;
+ int periodoActividadPrincipal;
+ string razonSocial;
+ string tipoClave;
+ string tipoDocumento;
+ string tipoPersona;
+}
+    [11] => struct domicilio {
+ string calle;
+ string codigoPostal;
+ string datoAdicional;
+ string descripcionProvincia;
+ string direccion;
+ string estadoDomicilio;
+ int idProvincia;
+ string localidad;
+ string manzana;
+ int numero;
+ string oficinaDptoLocal;
+ string piso;
+ string sector;
+ string tipoDatoAdicional;
+ string tipoDomicilio;
+ string torre;
+}
+    [12] => struct SRValidationException {
+}
+)

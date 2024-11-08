@@ -1,0 +1,425 @@
+Array
+(
+    [0] => struct FEXAuthorize {
+ ClsFEXAuthRequest Auth;
+ ClsFEXRequest Cmp;
+}
+    [1] => struct ClsFEXAuthRequest {
+ string Token;
+ string Sign;
+ long Cuit;
+}
+    [2] => struct ClsFEXRequest {
+ long Id;
+ string Fecha_cbte;
+ short Cbte_Tipo;
+ short Punto_vta;
+ long Cbte_nro;
+ short Tipo_expo;
+ string Permiso_existente;
+ ArrayOfPermiso Permisos;
+ short Dst_cmp;
+ string Cliente;
+ long Cuit_pais_cliente;
+ string Domicilio_cliente;
+ string Id_impositivo;
+ string Moneda_Id;
+ decimal Moneda_ctz;
+ string Obs_comerciales;
+ decimal Imp_total;
+ string Obs;
+ ArrayOfCmp_asoc Cmps_asoc;
+ string Forma_pago;
+ string Incoterms;
+ string Incoterms_Ds;
+ short Idioma_cbte;
+ ArrayOfItem Items;
+ ArrayOfOpcional Opcionales;
+}
+    [3] => struct ArrayOfPermiso {
+ Permiso Permiso;
+}
+    [4] => struct Permiso {
+ string Id_permiso;
+ int Dst_merc;
+}
+    [5] => struct ArrayOfCmp_asoc {
+ Cmp_asoc Cmp_asoc;
+}
+    [6] => struct Cmp_asoc {
+ short Cbte_tipo;
+ short Cbte_punto_vta;
+ long Cbte_nro;
+ long Cbte_cuit;
+}
+    [7] => struct ArrayOfItem {
+ Item Item;
+}
+    [8] => struct Item {
+ string Pro_codigo;
+ string Pro_ds;
+ decimal Pro_qty;
+ int Pro_umed;
+ decimal Pro_precio_uni;
+ decimal Pro_bonificacion;
+ decimal Pro_total_item;
+}
+    [9] => struct ArrayOfOpcional {
+ Opcional Opcional;
+}
+    [10] => struct Opcional {
+ string Id;
+ string Valor;
+}
+    [11] => struct FEXAuthorizeResponse {
+ FEXResponseAuthorize FEXAuthorizeResult;
+}
+    [12] => struct FEXResponseAuthorize {
+ ClsFEXOutAuthorize FEXResultAuth;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [13] => struct ClsFEXOutAuthorize {
+ long Id;
+ long Cuit;
+ short Cbte_tipo;
+ short Punto_vta;
+ long Cbte_nro;
+ string Cae;
+ string Fch_venc_Cae;
+ string Fch_cbte;
+ string Resultado;
+ string Reproceso;
+ string Motivos_Obs;
+}
+    [14] => struct ClsFEXErr {
+ int ErrCode;
+ string ErrMsg;
+}
+    [15] => struct ClsFEXEvents {
+ int EventCode;
+ string EventMsg;
+}
+    [16] => struct FEXGetCMP {
+ ClsFEXAuthRequest Auth;
+ ClsFEXGetCMP Cmp;
+}
+    [17] => struct ClsFEXGetCMP {
+ short Cbte_tipo;
+ short Punto_vta;
+ long Cbte_nro;
+}
+    [18] => struct FEXGetCMPResponse {
+ FEXGetCMPResponse FEXGetCMPResult;
+}
+    [19] => struct FEXGetCMPResponse {
+ ClsFEXGetCMPR FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [20] => struct ClsFEXGetCMPR {
+ long Id;
+ string Fecha_cbte;
+ short Cbte_tipo;
+ short Punto_vta;
+ long Cbte_nro;
+ short Tipo_expo;
+ string Permiso_existente;
+ ArrayOfPermiso Permisos;
+ short Dst_cmp;
+ string Cliente;
+ long Cuit_pais_cliente;
+ string Domicilio_cliente;
+ string Id_impositivo;
+ string Moneda_Id;
+ decimal Moneda_ctz;
+ string Obs_comerciales;
+ decimal Imp_total;
+ string Obs;
+ ArrayOfCmp_asoc Cmps_asoc;
+ string Forma_pago;
+ string Incoterms;
+ string Incoterms_Ds;
+ short Idioma_cbte;
+ ArrayOfItem Items;
+ string Fecha_cbte_cae;
+ string Fch_venc_Cae;
+ string Cae;
+ string Resultado;
+ string Motivos_Obs;
+ ArrayOfOpcional Opcionales;
+}
+    [21] => struct FEXGetPARAM_Cbte_Tipo {
+ ClsFEXAuthRequest Auth;
+}
+    [22] => struct FEXGetPARAM_Cbte_TipoResponse {
+ FEXResponse_Cbte_Tipo FEXGetPARAM_Cbte_TipoResult;
+}
+    [23] => struct FEXResponse_Cbte_Tipo {
+ ArrayOfClsFEXResponse_Cbte_Tipo FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [24] => struct ArrayOfClsFEXResponse_Cbte_Tipo {
+ ClsFEXResponse_Cbte_Tipo ClsFEXResponse_Cbte_Tipo;
+}
+    [25] => struct ClsFEXResponse_Cbte_Tipo {
+ short Cbte_Id;
+ string Cbte_Ds;
+ string Cbte_vig_desde;
+ string Cbte_vig_hasta;
+}
+    [26] => struct FEXGetPARAM_Tipo_Expo {
+ ClsFEXAuthRequest Auth;
+}
+    [27] => struct FEXGetPARAM_Tipo_ExpoResponse {
+ FEXResponse_Tex FEXGetPARAM_Tipo_ExpoResult;
+}
+    [28] => struct FEXResponse_Tex {
+ ArrayOfClsFEXResponse_Tex FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [29] => struct ArrayOfClsFEXResponse_Tex {
+ ClsFEXResponse_Tex ClsFEXResponse_Tex;
+}
+    [30] => struct ClsFEXResponse_Tex {
+ short Tex_Id;
+ string Tex_Ds;
+ string Tex_vig_desde;
+ string Tex_vig_hasta;
+}
+    [31] => struct FEXGetPARAM_Incoterms {
+ ClsFEXAuthRequest Auth;
+}
+    [32] => struct FEXGetPARAM_IncotermsResponse {
+ FEXResponse_Inc FEXGetPARAM_IncotermsResult;
+}
+    [33] => struct FEXResponse_Inc {
+ ArrayOfClsFEXResponse_Inc FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [34] => struct ArrayOfClsFEXResponse_Inc {
+ ClsFEXResponse_Inc ClsFEXResponse_Inc;
+}
+    [35] => struct ClsFEXResponse_Inc {
+ string Inc_Id;
+ string Inc_Ds;
+ string Inc_vig_desde;
+ string Inc_vig_hasta;
+}
+    [36] => struct FEXGetPARAM_Idiomas {
+ ClsFEXAuthRequest Auth;
+}
+    [37] => struct FEXGetPARAM_IdiomasResponse {
+ FEXResponse_Idi FEXGetPARAM_IdiomasResult;
+}
+    [38] => struct FEXResponse_Idi {
+ ArrayOfClsFEXResponse_Idi FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [39] => struct ArrayOfClsFEXResponse_Idi {
+ ClsFEXResponse_Idi ClsFEXResponse_Idi;
+}
+    [40] => struct ClsFEXResponse_Idi {
+ short Idi_Id;
+ string Idi_Ds;
+ string Idi_vig_desde;
+ string Idi_vig_hasta;
+}
+    [41] => struct FEXGetPARAM_UMed {
+ ClsFEXAuthRequest Auth;
+}
+    [42] => struct FEXGetPARAM_UMedResponse {
+ FEXResponse_Umed FEXGetPARAM_UMedResult;
+}
+    [43] => struct FEXResponse_Umed {
+ ArrayOfClsFEXResponse_UMed FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [44] => struct ArrayOfClsFEXResponse_UMed {
+ ClsFEXResponse_UMed ClsFEXResponse_UMed;
+}
+    [45] => struct ClsFEXResponse_UMed {
+ short Umed_Id;
+ string Umed_Ds;
+ string Umed_vig_desde;
+ string Umed_vig_hasta;
+}
+    [46] => struct FEXGetPARAM_DST_pais {
+ ClsFEXAuthRequest Auth;
+}
+    [47] => struct FEXGetPARAM_DST_paisResponse {
+ FEXResponse_DST_pais FEXGetPARAM_DST_paisResult;
+}
+    [48] => struct FEXResponse_DST_pais {
+ ArrayOfClsFEXResponse_DST_pais FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [49] => struct ArrayOfClsFEXResponse_DST_pais {
+ ClsFEXResponse_DST_pais ClsFEXResponse_DST_pais;
+}
+    [50] => struct ClsFEXResponse_DST_pais {
+ string DST_Codigo;
+ string DST_Ds;
+}
+    [51] => struct FEXGetPARAM_DST_CUIT {
+ ClsFEXAuthRequest Auth;
+}
+    [52] => struct FEXGetPARAM_DST_CUITResponse {
+ FEXResponse_DST_cuit FEXGetPARAM_DST_CUITResult;
+}
+    [53] => struct FEXResponse_DST_cuit {
+ ArrayOfClsFEXResponse_DST_cuit FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [54] => struct ArrayOfClsFEXResponse_DST_cuit {
+ ClsFEXResponse_DST_cuit ClsFEXResponse_DST_cuit;
+}
+    [55] => struct ClsFEXResponse_DST_cuit {
+ long DST_CUIT;
+ string DST_Ds;
+}
+    [56] => struct FEXGetPARAM_MON {
+ ClsFEXAuthRequest Auth;
+}
+    [57] => struct FEXGetPARAM_MONResponse {
+ FEXResponse_Mon FEXGetPARAM_MONResult;
+}
+    [58] => struct FEXResponse_Mon {
+ ArrayOfClsFEXResponse_Mon FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [59] => struct ArrayOfClsFEXResponse_Mon {
+ ClsFEXResponse_Mon ClsFEXResponse_Mon;
+}
+    [60] => struct ClsFEXResponse_Mon {
+ string Mon_Id;
+ string Mon_Ds;
+ string Mon_vig_desde;
+ string Mon_vig_hasta;
+}
+    [61] => struct FEXGetLast_CMP {
+ ClsFEX_LastCMP Auth;
+}
+    [62] => struct ClsFEX_LastCMP {
+ string Token;
+ string Sign;
+ long Cuit;
+ short Pto_venta;
+ short Cbte_Tipo;
+}
+    [63] => struct FEXGetLast_CMPResponse {
+ FEXResponseLast_CMP FEXGetLast_CMPResult;
+}
+    [64] => struct FEXResponseLast_CMP {
+ ClsFEX_LastCMP_Response FEXResult_LastCMP;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [65] => struct ClsFEX_LastCMP_Response {
+ long Cbte_nro;
+ string Cbte_fecha;
+}
+    [66] => struct FEXDummy {
+}
+    [67] => struct FEXDummyResponse {
+ DummyResponse FEXDummyResult;
+}
+    [68] => struct DummyResponse {
+ string AppServer;
+ string DbServer;
+ string AuthServer;
+}
+    [69] => struct FEXGetPARAM_Ctz {
+ ClsFEXAuthRequest Auth;
+ string Mon_id;
+}
+    [70] => struct FEXGetPARAM_CtzResponse {
+ FEXResponse_Ctz FEXGetPARAM_CtzResult;
+}
+    [71] => struct FEXResponse_Ctz {
+ ClsFEXResponse_Ctz FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [72] => struct ClsFEXResponse_Ctz {
+ decimal Mon_ctz;
+ string Mon_fecha;
+}
+    [73] => struct FEXGetLast_ID {
+ ClsFEXAuthRequest Auth;
+}
+    [74] => struct FEXGetLast_IDResponse {
+ FEXResponse_LastID FEXGetLast_IDResult;
+}
+    [75] => struct FEXResponse_LastID {
+ ClsFEXResponse_LastID FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [76] => struct ClsFEXResponse_LastID {
+ long Id;
+}
+    [77] => struct FEXGetPARAM_PtoVenta {
+ ClsFEXAuthRequest Auth;
+}
+    [78] => struct FEXGetPARAM_PtoVentaResponse {
+ FEXResponse_PtoVenta FEXGetPARAM_PtoVentaResult;
+}
+    [79] => struct FEXResponse_PtoVenta {
+ ArrayOfClsFEXResponse_PtoVenta FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [80] => struct ArrayOfClsFEXResponse_PtoVenta {
+ ClsFEXResponse_PtoVenta ClsFEXResponse_PtoVenta;
+}
+    [81] => struct ClsFEXResponse_PtoVenta {
+ short Pve_Nro;
+ string Pve_Bloqueado;
+ string Pve_FchBaja;
+}
+    [82] => struct FEXCheck_Permiso {
+ ClsFEXAuthRequest Auth;
+ string ID_Permiso;
+ int Dst_merc;
+}
+    [83] => struct FEXCheck_PermisoResponse {
+ FEXResponse_CheckPermiso FEXCheck_PermisoResult;
+}
+    [84] => struct FEXResponse_CheckPermiso {
+ ClsFEXResponse_CheckPermiso FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [85] => struct ClsFEXResponse_CheckPermiso {
+ string Status;
+}
+    [86] => struct FEXGetPARAM_Opcionales {
+ ClsFEXAuthRequest Auth;
+}
+    [87] => struct FEXGetPARAM_OpcionalesResponse {
+ FEXResponse_Opc FEXGetPARAM_OpcionalesResult;
+}
+    [88] => struct FEXResponse_Opc {
+ ArrayOfClsFEXResponse_Opc FEXResultGet;
+ ClsFEXErr FEXErr;
+ ClsFEXEvents FEXEvents;
+}
+    [89] => struct ArrayOfClsFEXResponse_Opc {
+ ClsFEXResponse_Opc ClsFEXResponse_Opc;
+}
+    [90] => struct ClsFEXResponse_Opc {
+ short Opc_Id;
+ string Opc_Ds;
+ string Opc_vig_desde;
+ string Opc_vig_hasta;
+}
+)

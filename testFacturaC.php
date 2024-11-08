@@ -11,7 +11,7 @@ include_once (__DIR__ . '/wsaa.php');
 * Recordar tener todos los servicios de homologación habilitados en AFIP
 * Ejecutar desde consola con "php testFacturaC.php"
 */
-$CUIT = "XXXXXXXXXXX"; // CUIT del emisor
+$CUIT = "20463482056"; // CUIT del emisor
 $MODO = Wsaa::MODO_HOMOLOGACION;
 
 echo "----------Script de prueba de AFIP WSFEV1----------\n";
@@ -27,18 +27,18 @@ $voucher = Array
     "tipoResponsable" => "Consumidor Final",
     "nombreCliente" =>  "JUAN PEREZ",
     "domicilioCliente" => "CALLE FALSA 123",
-    "fechaComprobante" => "20190303",
+    "fechaComprobante" => "20241107",
     "codigoTipoComprobante" => 11,
     "TipoComprobante" => "Factura",
     "codigoConcepto" => 1,
     "codigoMoneda" => "PES",
     "cotizacionMoneda" => 1.000,
-    "fechaDesde" => 20190303,
-    "fechaHasta" => 20190303,
-    "fechaVtoPago" => 20190303,
+    "fechaDesde" => 20241107,
+    "fechaHasta" => 20241107,
+    "fechaVtoPago" => 20241107,
     "codigoTipoDocumento" => 96,
     "TipoDocumento" => "DNI",
-    "numeroDocumento" => XXXXXXXX, // Debe ser diferente al DNI del emisor
+    "numeroDocumento" => "45189450", // Debe ser diferente al DNI del emisor
     "importeTotal" => 121.000,
     "importeOtrosTributos" => 0.000,
     "importeGravado" => 121.000,

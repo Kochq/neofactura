@@ -1,0 +1,148 @@
+Array
+(
+    [0] => struct getPersona {
+ string token;
+ string sign;
+ long cuitRepresentada;
+ long idPersona;
+}
+    [1] => struct getPersonaResponse {
+ personaReturn personaReturn;
+}
+    [2] => struct personaReturn {
+ datosGenerales datosGenerales;
+ datosMonotributo datosMonotributo;
+ datosRegimenGeneral datosRegimenGeneral;
+ errorConstancia errorConstancia;
+ errorMonotributo errorMonotributo;
+ errorRegimenGeneral errorRegimenGeneral;
+ metadata metadata;
+}
+    [3] => struct datosGenerales {
+ string apellido;
+ dependencia dependencia;
+ domicilio domicilioFiscal;
+ string estadoClave;
+ dateTime fechaContratoSocial;
+ long idPersona;
+ int mesCierre;
+ string nombre;
+ string razonSocial;
+ string tipoClave;
+ string tipoPersona;
+}
+    [4] => struct dependencia {
+ string codPostal;
+ string descripcionDependencia;
+ string descripcionProvincia;
+ string direccion;
+ int idDependencia;
+ int idProvincia;
+ string localidad;
+}
+    [5] => struct domicilio {
+ string codPostal;
+ string datoAdicional;
+ string descripcionProvincia;
+ string direccion;
+ int idProvincia;
+ string localidad;
+ string tipoDatoAdicional;
+ string tipoDomicilio;
+}
+    [6] => struct datosMonotributo {
+ actividad actividadMonotributista;
+ categoria categoriaMonotributo;
+ relacion componenteDeSociedad;
+ impuesto impuesto;
+}
+    [7] => struct actividad {
+ string descripcionActividad;
+ long idActividad;
+ int nomenclador;
+ int orden;
+ int periodo;
+}
+    [8] => struct categoria {
+ string descripcionCategoria;
+ int idCategoria;
+ int idImpuesto;
+ int periodo;
+}
+    [9] => struct relacion {
+ string apellidoPersonaAsociada;
+ dateTime ffRelacion;
+ dateTime ffVencimiento;
+ long idPersonaAsociada;
+ string nombrePersonaAsociada;
+ string razonSocialPersonaAsociada;
+ string tipoComponente;
+}
+    [10] => struct impuesto {
+ string descripcionImpuesto;
+ int idImpuesto;
+ int periodo;
+}
+    [11] => struct datosRegimenGeneral {
+ actividad actividad;
+ categoria categoriaAutonomo;
+ impuesto impuesto;
+ regimen regimen;
+}
+    [12] => struct regimen {
+ string descripcionRegimen;
+ int idImpuesto;
+ int idRegimen;
+ int periodo;
+ string tipoRegimen;
+}
+    [13] => struct errorConstancia {
+ string apellido;
+ string error;
+ long idPersona;
+ string nombre;
+}
+    [14] => struct errorMonotributo {
+ string error;
+ string mensaje;
+}
+    [15] => struct errorRegimenGeneral {
+ string error;
+ string mensaje;
+}
+    [16] => struct metadata {
+ dateTime fechaHora;
+ string servidor;
+}
+    [17] => struct getPersonaList {
+ string token;
+ string sign;
+ long cuitRepresentada;
+ long idPersona;
+}
+    [18] => struct getPersonaListResponse {
+ personaListReturn personaListReturn;
+}
+    [19] => struct personaListReturn {
+ metadata metadata;
+ persona persona;
+}
+    [20] => struct persona {
+ datosGenerales datosGenerales;
+ datosMonotributo datosMonotributo;
+ datosRegimenGeneral datosRegimenGeneral;
+ errorConstancia errorConstancia;
+ errorMonotributo errorMonotributo;
+ errorRegimenGeneral errorRegimenGeneral;
+}
+    [21] => struct dummy {
+}
+    [22] => struct dummyResponse {
+ dummyReturn return;
+}
+    [23] => struct dummyReturn {
+ string appserver;
+ string authserver;
+ string dbserver;
+}
+)

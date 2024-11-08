@@ -1,0 +1,6 @@
+Array
+(
+    [0] => dummyResponse dummy(dummy $parameters)
+    [1] => getIdPersonaListByDocumentoResponse getIdPersonaListByDocumento(getIdPersonaListByDocumento $parameters)
+    [2] => getPersonaResponse getPersona(getPersona $parameters)
+)

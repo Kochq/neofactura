@@ -11,33 +11,43 @@ include_once (__DIR__ . '/wsaa.php');
 * Recordar tener todos los servicios de homologación habilitados en AFIP
 * Ejecutar desde consola con "php testFacturaA.php"
 */
-$CUIT = "XXXXXXXXXXX"; // CUIT del emisor
-$MODO = Wsaa::MODO_HOMOLOGACION;
+$CUIT = "20463482056"; // CUIT del emisor
+$MODO = 0;
+
+$afip = new Wsfev1($CUIT,$MODO);
+
+// Consulto el ultimo comprobante autorizado, se le pasa (punton de venta - tipo comprobante)
+$ultimocomp = $afip->consultarUltimoComprobanteAutorizado(1,1);
+
+// le sumo uno, para que quede el siguiente comprobante a autorizar
+++$ultimocomp;
+
+$fecha = date('Ymd');
 
 echo "----------Script de prueba de AFIP WSFEV1----------\n";
 
 $voucher = Array(
     "idVoucher" => 1,
-    "numeroComprobante" => 1, // Debe estar sincronizado con el último número de AFIP
+    "numeroComprobante" => $ultimocomp, // Debe estar sincronizado con el último número de AFIP
     "numeroPuntoVenta" => 1,
     "cae" => 0,
     "letra" => "A",
-    "fechaVencimientoCAE" => "",
+    "fechaVencimientoCAE" => $fecha,
     "tipoResponsable" => "IVA Responsable Inscripto",
     "nombreCliente" =>  "JUAN PEREZ",
     "domicilioCliente" => "CALLE FALSA 123",
-    "fechaComprobante" => "20190303",
+    "fechaComprobante" => $fecha,
     "codigoTipoComprobante" => 1,
     "TipoComprobante" => "Factura",
     "codigoConcepto" => 1,
     "codigoMoneda" => "PES",
     "cotizacionMoneda" => 1.000,
-    "fechaDesde" => "20190303",
-    "fechaHasta" => "20190303",
-    "fechaVtoPago" => "20190303",
+    "fechaDesde" => $fecha,
+    "fechaHasta" => $fecha,
+    "fechaVtoPago" => $fecha,
     "codigoTipoDocumento" => 80,
     "TipoDocumento" => "DNI",
-    "numeroDocumento" => "XXXXXXXXXXX", // Debe ser diferente al CUIT emisor
+    "numeroDocumento" => "20451894502", // Debe ser diferente al CUIT emisor
     "importeTotal" => 121.000,
     "importeOtrosTributos" => 0.000,
     "importeGravado" => 100.000,
@@ -82,7 +92,6 @@ $voucher = Array(
 );
 
 try {
-    $afip = new Wsfev1($CUIT,$MODO);
     $result = $afip->emitirComprobante($voucher);
     print_r($result);
 } catch (Exception $e) {

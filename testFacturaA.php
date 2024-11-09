@@ -2,6 +2,7 @@
 
 include_once (__DIR__ . '/wsfev1.php');
 include_once (__DIR__ . '/wsaa.php');
+require "pdf_voucher.php";
 
 $CUIT = "20463482056"; // CUIT del emisor
 $MODO = 0;
@@ -15,17 +16,34 @@ $ultimocomp = $afip->consultarUltimoComprobanteAutorizado(1,1);
 ++$ultimocomp;
 
 $fecha = date('Ymd');
+$fechaCAE = date('Y-m-d');
 
 $json["numeroComprobante"] = $ultimocomp;
-$json["fechaVencimientoCAE"] = $fecha;
+$json["fechaVencimientoCAE"] = $fechaCAE;
 $json["fechaComprobante"] = $fecha;
 $json["fechaDesde"] = $fecha;
 $json["fechaHasta"] = $fecha;
 $json["fechaVtoPago"] = $fecha;
 
+$config = [
+    "TRADE_SOCIAL_REASON" => "EMPRESA SRL",
+    "TRADE_CUIT" => "20463482056",
+    "TRADE_ADDRESS" => "Calle 123",
+    "TRADE_TAX_CONDITION" => "No pago iva",
+    "TRADE_INIT_ACTIVITY" => "05/11/2024",
+    "VOUCHER_OBSERVATION" => ""
+];
+
+
 try {
     $result = $afip->emitirComprobante($json);
-    print_r($result);
+    $json["cae"] = $result["cae"];
+    $pdf = new PDFVoucher($json, $config);
+    $logo_path = "/home/koch/Pictures/ScreenShot.png";
+    $pdf->emitirPDF($logo_path);
+    $pdf->output(); // ("path/to/pdf", "F") para que lo cree en un archivo en el server
 } catch (Exception $e) {
     echo 'Falló la ejecución: ' . $e->getMessage();
 }
+
+

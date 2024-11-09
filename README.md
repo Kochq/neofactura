@@ -1,18 +1,5 @@
 # Neofactura
 
-Web oficial para consultas o sugerencias: http://neofactura.neocomplexx.com/
-
-Implementación simple para interactuar con WebService de AFIP y realizar Factura Electrónica Argentina en PHP.
-Luego de emitir la factura, podés generar un pdf con nuestra segunda librería: https://github.com/neocomplexx/neopdf
-
-Permite realizar Facturas, Notas de Crédito y Débito: A, B y C con webservice wsfev1.
-
-Versión 1.1: Agrega Factura de exportación E con webservice wsfexv1
-
-Versión 1.2: Agrega Consulta de personas (Padrón A5) con webservice WsSrPadronA5
-
-Versión 1.3: Agrega Consulta de personas (Padrón A13) con webservice WsSrPadronA13
-
 Pasos:
 
 1. Clonar repositorio de github
@@ -21,11 +8,18 @@ Pasos:
 4. Dentro de dichas carpetas crear dos carpetas más: ./[cuit]./[serviceName]/tmp y ./[cuit]./[serviceName]/token
 5. Crear las carpetas "./key/homologacion" y "./key/produccion"
 6. En ./key/homologacion y ./key/produccion colocar los certificados generados en afip junto con las claves privadas.
+7. Composer install
 
 Test:
 
 1. Editar el archivo test.php y modificar el valor de la variable $CUIT por el de la persona autorizada en AFIP.
 2. Probar la libreria desde consola con "php test.php" -> Debería imprimir OK por cada web service.
 3. Opcional: Podrás probar los distintos tipos de comprobante desde los ejemplos nombrados como testFacturaX.php
+
+Rutas:
+/test -> Run test.php
+/factura/A -> Run testFacturaA.php
+/factura/B -> Run testFacturaB.php
+/factura/C -> Run testFacturaB.php
 
 ¿Más info? -> https://github.com/neocomplexx/neofactura/wiki

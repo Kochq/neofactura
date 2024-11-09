@@ -17,9 +17,11 @@ Test:
 3. Opcional: Podrás probar los distintos tipos de comprobante desde los ejemplos nombrados como testFacturaX.php
 
 Rutas:
-/test -> Run test.php
-/factura/A -> Run testFacturaA.php
-/factura/B -> Run testFacturaB.php
-/factura/C -> Run testFacturaB.php
+
+1. /test -> Run test.php
+2. /factura/A -> Run testFacturaA.php
+3. /factura/B -> Run testFacturaB.php
+4. /factura/C -> Run testFacturaB.php
+
 
 ¿Más info? -> https://github.com/neocomplexx/neofactura/wiki

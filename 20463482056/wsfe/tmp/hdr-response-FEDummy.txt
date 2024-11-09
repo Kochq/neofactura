@@ -1,5 +1,5 @@
 HTTP/1.1 200 OK
-Date: Fri, 08 Nov 2024 21:30:57 GMT
+Date: Fri, 08 Nov 2024 22:03:44 GMT
 MicrosoftOfficeWebServer: 5.0_Pub
 Expect-CT: enforce
 Strict-Transport-Security: nosniff
@@ -8,6 +8,6 @@ X-Frame-Options: SAMEORIGIN
 X-Xss-Protection: 1; mode=block
 Cache-Control: private, max-age=0
 Content-Type: application/soap+xml; charset=utf-8
-Content-Length: 615
-Set-Cookie: f5avraaaaaaaaaaaaaaaa_session_=KMANMOJMJCDPLDGIAFNKGAOCNJGMDGJJJIJHOLHMIJEAODDMJNKPBAEANNIFLDMIKGIDNLFHECNJDABLMGKAGKPNMIDDAIAFACNPGKHBJJGHFILCLJMAMLNBKPONGKNK; HttpOnly; secure
-Set-Cookie: TS010b76f1=01439f1ddf978578d2fae8bbe40c8770698e4e05f14d702bd482bbf1c4b3807183e46e1204d5fb0766a3e329cac9c8f1db1d0077e55bf400e7cba153dc13422653c8b1ec72; Path=/; Domain=.wswhomo.afip.gov.ar
+Content-Length: 613
+Set-Cookie: f5avraaaaaaaaaaaaaaaa_session_=MIAEOAGHCOPHDMODGGPIIMAIGEEGDGGOEMPOLPAGEJMNFEHAECKJGCFANBHNLPLGCGNDMOAODKLHGINHIDPABMCHHIMDDNBEPDOKCOAGHNDMBLBAHOLOBAPOCGMNGHHN; HttpOnly; secure
+Set-Cookie: TS010b76f1=01439f1ddff2f1e791208a6497f397d6428afc7834ee8111ef6a02cf107b27843679b29cd5290c894ac070fbcb1181d5dafe07b9333e6e76b3ce69e9725ec41725bf8760ba; Path=/; Domain=.wswhomo.afip.gov.ar

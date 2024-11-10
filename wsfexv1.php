@@ -80,12 +80,12 @@ class Wsfexv1 extends WsAFIP {
         //$params->Cmp->Obs = ""; // [N]
         
         //COMPROBANTES ASOCIADOS*****************************************
-        if (array_key_exists("CbtesAsoc", $voucher) && count($voucher["CbtesAsoc"]) > 0) {
+        if (array_key_exists("cbtesAsoc", $voucher) && count($voucher["cbtesAsoc"]) > 0) {
             $params->Cmp->Cmps_asoc = array(); // [N]
-            foreach ($voucher["CbtesAsoc"] as $value) {
+            foreach ($voucher["cbtesAsoc"] as $value) {
                 $cbte = new stdClass();
-                $cbte->Cbte_tipo = $value["Tipo"];
-                $cbte->Cbte_punto_vta = $value["PtoVta"];
+                $cbte->Cbte_tipo = $value["tipo"];
+                $cbte->Cbte_punto_vta = $value["ptoVta"];
                 $cbte->Cbte_nro = $value["Nro"];
                 $cbte->Cbte_cuit = $this->cuit;
                 $params->Cmp->Cmps_asoc[] = $cbte;

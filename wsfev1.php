@@ -399,22 +399,22 @@ class Wsfev1 extends WsAFIP {
             foreach ($voucher["subtotivas"] as $value) {
                 $iva = new stdClass();
                 $iva->Id = $value["codigo"];
-                $iva->BaseImp = $value["BaseImp"];
+                $iva->BaseImp = $value["baseImp"];
                 $iva->Importe = $value["importe"];
                 $comprobante->Iva[] = $iva;
             }
         }
 
         //OTROS TRIBUTO*****************************************
-        if (array_key_exists("Tributos", $voucher) && count($voucher["Tributos"]) > 0) {
+        if (array_key_exists("tributos", $voucher) && count($voucher["tributos"]) > 0) {
             $comprobante->Tributos = array();
-            foreach ($voucher["Tributos"] as $value) {
+            foreach ($voucher["tributos"] as $value) {
                 $tributo = new stdClass();
                 $tributo->Id = $value["codigo"];
                 $tributo->Desc = $value["descripcion"];
                 $tributo->BaseImp = $value["baseImponible"];
                 $tributo->Importe = $value["importe"];
-                $tributo->Alic = $value["Alic"];
+                $tributo->Alic = $value["alic"];
                 $comprobante->Tributos[] = $tributo;
             }
         }
@@ -480,7 +480,7 @@ class Wsfev1 extends WsAFIP {
             foreach ($voucher["subtotivas"] as $value) {
                 $iva = new stdClass();
                 $iva->Id = $value["codigo"];
-                $iva->BaseImp = $value["BaseImp"];
+                $iva->BaseImp = $value["baseImp"];
                 $iva->Importe = $value["importe"];
                 $comprobante->Iva[] = $iva;
             }
@@ -512,15 +512,15 @@ class Wsfev1 extends WsAFIP {
         }
 
         //COMPROBANTES ASOCIADOS*****************************************
-        if (count($voucher["CbtesAsoc"]) > 0) {
+        if (count($voucher["cbtesAsoc"]) > 0) {
             $comprobante->CbtesAsoc = array();
-            foreach ($voucher["CbtesAsoc"] as $value) {
+            foreach ($voucher["cbtesAsoc"] as $value) {
                 $cbte = new stdClass();
-                $cbte->Tipo = $value["Tipo"];
-                $cbte->PtoVta = $value["PtoVta"];
-                $cbte->Nro = $value["Nro"];
-                $cbte->Cuit = $value["Cuit"];
-                $cbte->CbteFch = $value["CbteFch"];
+                $cbte->Tipo = $value["tipo"];
+                $cbte->PtoVta = $value["ptoVta"];
+                $cbte->Nro = $value["nro"];
+                $cbte->Cuit = $value["cuit"];
+                $cbte->CbteFch = $value["cbteFch"];
                 $comprobante->CbtesAsoc[] = $cbte;
             }
         }

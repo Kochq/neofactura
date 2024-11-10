@@ -65,7 +65,7 @@ class PDFVoucher extends HTML2PDF {
                 $this->html .= "<div class='border-div'>";
             }
 
-            $type = $this->lang($this->voucher["TipoComprobante"]);
+            $type = $this->lang($this->voucher["tipoComprobante"]);
             $letter = $this->voucher["letra"];
             $number = $this->lang("Punto de venta") . ": " . str_pad($this->voucher["numeroPuntoVenta"], 4, "0", STR_PAD_LEFT) . "   " . $this->lang("Comp. Nro") . ": " . str_pad($this->voucher["numeroComprobante"], 8, "0", STR_PAD_LEFT);
             $tmp = DateTime::createFromFormat('Ymd',$this->voucher["fechaComprobante"]);
@@ -134,7 +134,7 @@ class PDFVoucher extends HTML2PDF {
             $this->html .= "<div class='border-div'>";
             $this->html .= "<table class='responsive-table table-header'>";
             $this->html .= "<tr>";
-            $text = $this->lang($this->voucher["TipoDocumento"]) . ": " . $this->voucher["numeroDocumento"];
+            $text = $this->lang($this->voucher["tipoDocumento"]) . ": " . $this->voucher["numeroDocumento"];
             $this->html .= "<td style='width:50%;'>" . $text . "</td>";
             $text = $this->lang("Apellido y Nombre / Raz&oacute;n Social") . ": " . strtoupper($this->voucher["nombreCliente"]);
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
@@ -146,7 +146,7 @@ class PDFVoucher extends HTML2PDF {
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $text = $this->lang("Condici&oacute;nes de venta") . ": " . $this->lang($this->voucher["CondicionVenta"]);
+            $text = $this->lang("Condici&oacute;nes de venta") . ": " . $this->lang($this->voucher["condicionVenta"]);
             $this->html .= "<td style='width:10%;'>" . $text . "</td>";
             $this->html .= "</tr>";
             $this->html .= "</table>";
@@ -196,11 +196,11 @@ class PDFVoucher extends HTML2PDF {
             }
             $this->html .= "<td style='width=26%;'>" . $item["descripcion"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
-            $this->html .= "<td style='width=10%;'>" . $item["UnidadMedida"] . "</td>";
+            $this->html .= "<td style='width=10%;'>" . $item["unidadMedida"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=8%;'>" . number_format($item["porcBonif"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";
-            $this->html .= "<td class='right-text' style='width=6%;'>" . number_format($item["Alic"], 0) . "%</td>";
+            $this->html .= "<td class='right-text' style='width=6%;'>" . number_format($item["alic"], 0) . "%</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["importeItem"], 2) . "</td>";
             $this->html .= "</tr>";
         }
@@ -284,7 +284,7 @@ class PDFVoucher extends HTML2PDF {
      */
     private function othertaxes() {
         $str = "";
-        if (count($this->voucher['Tributos']) > 0) {
+        if (count($this->voucher['tributos']) > 0) {
             $str .= '    <table class="responsive-table table-article">';
 
             //Title
@@ -296,7 +296,7 @@ class PDFVoucher extends HTML2PDF {
             $str .= '            <th class="center-text" style="width=40px;">' . $this->lang("Importe") . '</th>';
             $str .= '        </tr>';
 
-            foreach ($this->voucher['Tributos'] as $tax) {
+            foreach ($this->voucher['tributos'] as $tax) {
                 $str .= '        <tr>';
                 $str .= '            <td class="left-text" style="width=200px;">' . $tax["Desc"] . '</td>';
                 $str .= '            <td class="right-text" style="width=40px;">' . $tax["Importe"] . '</td>';
@@ -331,7 +331,7 @@ class PDFVoucher extends HTML2PDF {
         $str .= '            <td class="right-text" style="width=70px;">' . $importeGravado . '</td>';
         $str .= '        </tr>';
         foreach ($this->voucher["subtotivas"] as $iva) {
-            $value = $iva["Alic"];
+            $value = $iva["alic"];
             $descripcion = "IVA $value%: " . $this->lang($this->voucher["codigoMoneda"]);
             $importe = number_format((float) round($iva["importe"], 2), 2, '.', '');
             $str .= '        <tr>';

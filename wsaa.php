@@ -16,8 +16,8 @@ class Wsaa {
     const MODO_PRODUCCION = 1;
     const WSDL_HOMOLOGACION = "/wsdl/homologacion/wsaa.wsdl"; # WSDL del web service WSAA
     const URL_HOMOLOGACION = "https://wsaahomo.afip.gov.ar/ws/services/LoginCms";
-    const CERT_HOMOLOGACION = "/key/homologacion/certificado.pem"; # Certificado X.509 otorgado por AFIP
-    const PRIVATEKEY_HOMOLOGACION = "/key/homologacion/privada"; # Clave privada de la PC
+    const CERT_HOMOLOGACION = "/key/homologacion/MiCertificado.pem"; # Certificado X.509 otorgado por AFIP
+    const PRIVATEKEY_HOMOLOGACION = "/key/homologacion/MiClavePrivada"; # Clave privada de la PC
     const WSDL_PRODUCCION = "/wsdl/produccion/wsaa.wsdl";
     const URL_PRODUCCION = "https://wsaa.afip.gov.ar/ws/services/LoginCms"; 
     const CERT_PRODUCCION = "/key/produccion/certificado.pem";

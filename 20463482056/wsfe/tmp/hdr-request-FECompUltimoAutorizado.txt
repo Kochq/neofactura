@@ -1,7 +1,7 @@
 POST /wsfev1/service.asmx HTTP/1.1
 Host: wswhomo.afip.gov.ar
 Connection: Keep-Alive
-User-Agent: PHP-SOAP/8.3.13
+User-Agent: PHP-SOAP/8.2.25
 Content-Type: application/soap+xml; charset=utf-8; action="http://ar.gov.afip.dif.FEV1/FECompUltimoAutorizado"
 Content-Length: 1325
 

@@ -2,6 +2,7 @@
 
 include_once (__DIR__ . '/wsfev1.php');
 include_once (__DIR__ . '/wsaa.php');
+require "pdf_ticket.php";
 
 /**
 * Este script sirve para probar el webservice WSFEV1 con Factura C
@@ -14,71 +15,71 @@ include_once (__DIR__ . '/wsaa.php');
 $CUIT = "20463482056"; // CUIT del emisor
 $MODO = Wsaa::MODO_HOMOLOGACION;
 
-echo "----------Script de prueba de AFIP WSFEV1----------\n";
+$afip = new Wsfev1($CUIT,$MODO);
 
-$voucher = Array
-(
-    "idVoucher" => 1,
-    "numeroComprobante" => 1,
-    "numeroPuntoVenta" => 1,
-    "cae" => 0,
-    "letra" => "C",
-    "fechaVencimientoCAE" => "",
-    "tipoResponsable" => "Consumidor Final",
-    "nombreCliente" =>  "JUAN PEREZ",
-    "domicilioCliente" => "CALLE FALSA 123",
-    "fechaComprobante" => "20241107",
-    "codigoTipoComprobante" => 11,
-    "TipoComprobante" => "Factura",
-    "codigoConcepto" => 1,
-    "codigoMoneda" => "PES",
-    "cotizacionMoneda" => 1.000,
-    "fechaDesde" => 20241107,
-    "fechaHasta" => 20241107,
-    "fechaVtoPago" => 20241107,
-    "codigoTipoDocumento" => 96,
-    "TipoDocumento" => "DNI",
-    "numeroDocumento" => "45189450", // Debe ser diferente al DNI del emisor
-    "importeTotal" => 121.000,
-    "importeOtrosTributos" => 0.000,
-    "importeGravado" => 121.000,
-    "importeNoGravado" => 0.000,
-    "importeExento" => 0.000,
-    "importeIVA" => 0.000,
-    "codigoPais" => 200,
-    "idiomaComprobante" => 1,
-    "NroRemito" => 0,
-    "CondicionVenta" => "Efectivo",
-    "items" => Array
-        (
-            0 => Array
-                (
-                    "codigo" => 112233445566,
-                    "scanner" => 112233445566,
-                    "descripcion" => "Producto de prueba",
-                    "codigoUnidadMedida" => 7,
-                    "UnidadMedida" => "Unidades",
-                    "codigoCondicionIVA" => 1,
-                    "Alic" => 0,
-                    "cantidad" => 1.00,
-                    "porcBonif" => 0.000,
-                    "impBonif" => 0.000,
-                    "precioUnitario" => 121.00,
-                    "importeIVA" => 0.000,
-                    "importeItem" => 121.00,
-                )
-        ),
-    "subtotivas" => Array(),
-    "Tributos" => Array(),
-    "CbtesAsoc" => Array()
-);
+// Consulto el ultimo comprobante autorizado, se le pasa (punton de venta - tipo comprobante)
+$ultimocomp = $afip->consultarUltimoComprobanteAutorizado(1,11);
+
+// le sumo uno, para que quede el siguiente comprobante a autorizar
+++$ultimocomp;
+
+$fecha = date('Ymd');
+$fechaCAE = date('Y-m-d');
+
+$json["numeroComprobante"] = $ultimocomp;
+$json["fechaVencimientoCAE"] = $fechaCAE;
+$json["fechaComprobante"] = $fecha;
+$json["fechaDesde"] = $fecha;
+$json["fechaHasta"] = $fecha;
+$json["fechaVtoPago"] = $fecha;
+
+$config = [
+    "TRADE_SOCIAL_REASON" => "EMPRESA SRL",
+    "TRADE_CUIT" => "20463482056",
+    "TRADE_ADDRESS" => "Calle 123",
+    "TRADE_TAX_CONDITION" => "No pago iva",
+    "TRADE_INIT_ACTIVITY" => "05/11/2024",
+    "VOUCHER_OBSERVATION" => ""
+];
+
+    $ptoVta = $json['numeroPuntoVenta'];
+    $tipoCmp = $json['codigoTipoComprobante'];
+    $nroCmp = $json['numeroComprobante'];
+    $importe = $json['importeTotal'];
+    $moneda = $json['codigoMoneda'];
+    $ctz = $json['cotizacionMoneda'];
+    $tipoDocRec = $json['codigoTipoDocumento'];
+    $nroDocRec = $json['numeroDocumento'];
+echo $qrJson;
 
 try {
-    $afip = new Wsfev1($CUIT,$MODO);
-    $result = $afip->emitirComprobante($voucher);
-    print_r($result);
+    $result = $afip->emitirComprobante($json);
+    $json["cae"] = $result["cae"];
+    $ticket['cae'] = $result["cae"];
+    $config['TRADE_IIBB'] = "12345432";
+
+
+
+    $qrJson = '{
+        "ver": 1,
+        "fecha": "' . $fechaCAE . '",
+        "cuit": ' . $CUIT . ',
+        "ptoVta": ' . $ptoVta . ',
+        "tipoCmp": ' . $tipoCmp . ',
+        "nroCmp": ' . $nroCmp . ',
+        "importe": ' . $importe . ',
+        "moneda": "' . $moneda . '",
+        "ctz": ' . $ctz . ',
+        "tipoDocRec": ' . $tipoDocRec . ',
+        "nroDocRec": ' . $nroDocRec . ',
+        "tipoCodAut": "E",
+        "codAut": ' . $result['cae'] . '
+        }';
+
+
+
+    $generator = new HTMLTicket($ticket, $config, $qrJson);
+    $he = $generator->generateHTML();
 } catch (Exception $e) {
     echo 'Falló la ejecución: ' . $e->getMessage();
 }
-
-echo "--------------Ejecución WSFEV1 finalizada-----------------\n";

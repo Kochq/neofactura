@@ -39,7 +39,7 @@ try {
     $result = $afip->emitirComprobante($json);
     $json["cae"] = $result["cae"];
     $pdf = new PDFVoucher($json, $config);
-    $logo_path = "/home/koch/Pictures/ScreenShot.png";
+    $logo_path = "/home/koch/Workspace/fusionDevs/neofactura/assets/cuadrado.png";
     $pdf->emitirPDF($logo_path);
     $pdf->output("/home/koch/docu.pdf", "F"); // ("path/to/pdf", "F") para que lo cree en un archivo en el server
     print_r($result);

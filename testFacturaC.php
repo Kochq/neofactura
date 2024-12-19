@@ -42,14 +42,28 @@ $config = [
     "VOUCHER_OBSERVATION" => ""
 ];
 
-    $ptoVta = $json['numeroPuntoVenta'];
-    $tipoCmp = $json['codigoTipoComprobante'];
-    $nroCmp = $json['numeroComprobante'];
-    $importe = $json['importeTotal'];
-    $moneda = $json['codigoMoneda'];
-    $ctz = $json['cotizacionMoneda'];
-    $tipoDocRec = $json['codigoTipoDocumento'];
-    $nroDocRec = $json['numeroDocumento'];
+$ptoVta = $json['numeroPuntoVenta'];
+$tipoCmp = $json['codigoTipoComprobante'];
+$nroCmp = $json['numeroComprobante'];
+$importe = $json['importeTotal'];
+$moneda = $json['codigoMoneda'];
+$ctz = $json['cotizacionMoneda'];
+$tipoDocRec = $json['codigoTipoDocumento'];
+$nroDocRec = $json['numeroDocumento'];
+
+$ticket = [
+    'letra' => 'C',
+    'codigoTipoComprobante' => $json['numeroComprobante'],
+    'numeroPuntoVenta' => $json['numeroPuntoVenta'],
+    'numeroComprobante' => $json['numeroComprobante'],
+    'fechaComprobante' => $json['fechaComprobante'],
+    'concepto' => 'Productos',
+    'tipoResponsable' => 'A CONSUMIDOR FINAL',
+    'items' => $json['items'],
+    'importeTotal' => $json['importeTotal'],
+    'fechaVencimientoCAE' => $json["fechaVencimientoCAE"]
+];
+
 echo $qrJson;
 
 try {
@@ -74,12 +88,18 @@ try {
         "nroDocRec": ' . $nroDocRec . ',
         "tipoCodAut": "E",
         "codAut": ' . $result['cae'] . '
-        }';
-
-
+    }';
 
     $generator = new HTMLTicket($ticket, $config, $qrJson);
-    $he = $generator->generateHTML();
+
+    $fecha = date('d-m-Y-H-i-s');
+
+    $nombreDelArchivo = "ticket_$fecha.pdf";
+    http_response_code(202);
+    $pdf = $generator->generateHTML($nombreDelArchivo);
+    echo $pdf;
+    header('Content-Length: ' . strlen($pdf));
+
 } catch (Exception $e) {
     echo 'Falló la ejecución: ' . $e->getMessage();
 }

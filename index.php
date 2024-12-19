@@ -1,4 +1,12 @@
 <?php
+
+header('Content-Type: application/pdf');
+header('Content-Disposition: attachment; filename="facturaC.pdf"');
+header('Content-Transfer-Encoding: binary');
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 require __DIR__ . '/vendor/autoload.php';
 $request = $_SERVER['REQUEST_URI'];
 
@@ -14,9 +22,9 @@ $json = json_decode(file_get_contents('php://input'), true);
 
 $jwtCookie = $headers['Authorization'];
 $token = explode(" ", $jwtCookie)[1];
+
 $key = $_ENV['KEY'];
 $key = base64_decode($key);
-print("TOKEN: ". $token);
 
 $decoded = JWT::decode($token, new Key($key, 'HS512'));
 $decoded_array = (array) $decoded;
@@ -30,29 +38,6 @@ $config = [
     'TRADE_INIT_ACTIVITY' => '25/10/2023',
     'STORE_ID' => 'storeID'
 ];
-
-// Example ticket data
-$ticket = [
-    'letra' => 'C',
-    'codigoTipoComprobante' => '11',
-    'numeroPuntoVenta' => 4,
-    'numeroComprobante' => 1484,
-    'fechaComprobante' => '2023-11-21',
-    'concepto' => 'Productos',
-    'tipoResponsable' => 'A CONSUMIDOR FINAL',
-    'items' => [
-        [
-            'descripcion' => 'Cafe Americano',
-            'alic' => 21,
-            'importeItem' => 1500.00
-        ]
-    ],
-    'importeTotal' => 1500.00,
-    'cae' => '12345678912345',
-    'fechaVencimientoCAE' => '2023-11-05'
-];
-
-print_r($decoded_array);
 
 switch ($request) {
     case '/factura/A':

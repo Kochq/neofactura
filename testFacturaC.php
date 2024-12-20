@@ -50,7 +50,7 @@ $config = [
     $ctz = $json['cotizacionMoneda'];
     $tipoDocRec = $json['codigoTipoDocumento'];
     $nroDocRec = $json['numeroDocumento'];
-echo $qrJson;
+//echo $qrJson;
 
 try {
     $result = $afip->emitirComprobante($json);
@@ -80,6 +80,11 @@ try {
 
     $generator = new HTMLTicket($ticket, $config, $qrJson);
     $he = $generator->generateHTML();
+    
+
+    
+
+
 } catch (Exception $e) {
     echo 'Falló la ejecución: ' . $e->getMessage();
 }

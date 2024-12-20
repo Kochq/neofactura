@@ -2,6 +2,7 @@
 
 include_once (__DIR__ . '/wsfev1.php');
 include_once (__DIR__ . '/wsaa.php');
+require "pdf_voucher.php";
 require "pdf_ticket.php";
 
 /**
@@ -64,15 +65,11 @@ $ticket = [
     'fechaVencimientoCAE' => $json["fechaVencimientoCAE"]
 ];
 
-echo $qrJson;
-
 try {
     $result = $afip->emitirComprobante($json);
     $json["cae"] = $result["cae"];
     $ticket['cae'] = $result["cae"];
     $config['TRADE_IIBB'] = "12345432";
-
-
 
     $qrJson = '{
         "ver": 1,
@@ -90,13 +87,24 @@ try {
         "codAut": ' . $result['cae'] . '
     }';
 
-    $generator = new HTMLTicket($ticket, $config, $qrJson);
-
     $fecha = date('d-m-Y-H-i-s');
+    $logo_path = "/home/koch/Workspace/fusionDevs/neofactura/assets/cuadrado.png";
 
-    $nombreDelArchivo = "ticket_$fecha.pdf";
-    http_response_code(202);
-    $pdf = $generator->generateHTML($nombreDelArchivo);
+    if($tipoPdf == "grande") {
+        error_log("ASDASDAS: ".$ticket['importeTotal']);
+        $nombreDelArchivo = "factura_$fecha.pdf";
+        $generator = new PDFVoucher($json, $config);
+
+        $pdf = $generator->emitirPDF($nombreDelArchivo, $logo_path);
+    } else if($tipoPdf == "ticket") {
+        error_log("ASDASDAS: ".$ticket['importeTotal']);
+        $nombreDelArchivo = "ticket_$fecha.pdf";
+        $generator = new HTMLTicket($ticket, $config, $qrJson);
+
+        $pdf = $generator->generateHTML($nombreDelArchivo);
+    }
+
+    http_response_code(200);
     echo $pdf;
     header('Content-Length: ' . strlen($pdf));
 

@@ -477,7 +477,7 @@ class PDFVoucher extends HTML2PDF {
      * 
      * @author NeoComplexx Group S.A.
      */
-    function emitirPDF($logo_path) {
+    function emitirPDF($name, $logo_path) {
         //ORIGINAL
         $this->html .= "<page>";
         $this->addVoucherInformation($logo_path, $this->lang("ORIGINAL"));
@@ -493,6 +493,7 @@ class PDFVoucher extends HTML2PDF {
         $this->footer();
         $this->html .= "</page>";
         $this->WriteHTML($this->html);
+        $this->output("/home/koch/$name", 'S');
     }
 
 }

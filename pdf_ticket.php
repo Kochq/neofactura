@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('America/Argentina/Buenos_Aires');
 
 class HTMLTicket {
     private $config = array();
@@ -25,7 +26,7 @@ class HTMLTicket {
 
     return $baseHeight + $contentHeight;
 }
-    public function generateHTML() {
+    public function generateHTML($name) {
         $html = $this->getHTMLHeader();
         $html .= $this->getBusinessInfo();
         $html .= $this->getTicketInfo();
@@ -35,7 +36,6 @@ class HTMLTicket {
         $html .= $this->getFooterInfo();
         $html .= $this->getHTMLFooter();
         $height = $this->calculateDynamicHeight($html);
-        echo $html;
 
         // Crear un nuevo documento con formato personalizado
         $pdf = new TCPDF('P', 'mm', array(79.5, $height)); // Ancho 80 mm y altura inicial de 150 mm (ajustable)
@@ -51,8 +51,7 @@ class HTMLTicket {
         $pdf->SetFont('Helvetica', '', 10);
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        // Salida del archivo
-        $pdf->Output('C:\Users\Asus\Desktop\FusionDevs\acturasPrueba\ticket.pdf', 'F');
+        return $pdf->Output("/home/koch/$name", 'S');
     }
 
     /**

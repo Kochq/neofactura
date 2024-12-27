@@ -134,25 +134,40 @@ class PDFVoucher extends HTML2PDF {
             $this->html .= "<div class='border-div'>";
             $this->html .= "<table class='responsive-table table-header'>";
             $this->html .= "<tr>";
-            $text = $this->lang($this->voucher["tipoDocumento"]) . ": " . $this->voucher["numeroDocumento"];
+    
+            $tipoDocumento = $this->voucher["tipoDocumento"] ?? '';
+            $numeroDocumento = ($this->voucher["numeroDocumento"] ?? '') == 0 ? '' : $this->voucher["numeroDocumento"];
+            $text = $this->lang($tipoDocumento) . ": " . $numeroDocumento;
             $this->html .= "<td style='width:50%;'>" . $text . "</td>";
-            $text = $this->lang("Apellido y Nombre / Raz&oacute;n Social") . ": " . strtoupper($this->voucher["nombreCliente"]);
+    
+            $nombreCliente = strtoupper($this->voucher["nombreCliente"] ?? 'A Consumidor Final');
+            $text = $this->lang("Apellido y Nombre / Raz&oacute;n Social") . ": " . $nombreCliente;
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
+    
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $text = $this->lang("Condici&oacute;n frente al IVA") . ": " . $this->lang($this->voucher["tipoResponsable"]);
+    
+            $tipoResponsable = $this->voucher["tipoResponsable"] ?? '';
+            $text = $this->lang("Condici&oacute;n frente al IVA") . ": " . $this->lang($tipoResponsable);
             $this->html .= "<td style='width:50%;'>" . $text . "</td>";
-            $text = $this->lang("Domicilio") . ": " . $this->voucher["domicilioCliente"];
+    
+            $domicilioCliente = $this->voucher["domicilioCliente"] ?? '';
+            $text = $this->lang("Domicilio") . ": " . $domicilioCliente;
             $this->html .= "<td class='right-text' style='width:49%;'>" . $text . "</td>";
+    
             $this->html .= "</tr>";
             $this->html .= "<tr>";
-            $text = $this->lang("Condici&oacute;nes de venta") . ": " . $this->lang($this->voucher["condicionVenta"]);
+    
+            $condicionVenta = $this->voucher["condicionVenta"] ?? '';
+            $text = $this->lang("Condici&oacute;nes de venta") . ": " . $this->lang($condicionVenta);
             $this->html .= "<td style='width:10%;'>" . $text . "</td>";
+    
             $this->html .= "</tr>";
             $this->html .= "</table>";
             $this->html .= "</div>";
         }
     }
+    
 
     /**
      * Genera la tabla con los articulos del comprobante
@@ -231,7 +246,7 @@ class PDFVoucher extends HTML2PDF {
             }
             $this->html .= "<td style='width=30%;'>" . $item["descripcion"] . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["cantidad"], 3) . "</td>";
-            $this->html .= "<td style='width=10%;'>" . $this->lang($item["UnidadMedida"]) . "</td>";
+            $this->html .= "<td style='width=10%;'>" . $this->lang("Unidades") . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["precioUnitario"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["porcBonif"], 2) . "</td>";
             $this->html .= "<td class='right-text' style='width=10%;'>" . number_format($item["impBonif"], 2) . "</td>";
@@ -493,7 +508,11 @@ class PDFVoucher extends HTML2PDF {
         $this->footer();
         $this->html .= "</page>";
         $this->WriteHTML($this->html);
-        $this->output("/home/koch/$name", 'S');
+        
+        return $this->Output($name, 'S');
+    }
+    public function getGeneratedHTML() {
+        return $this->html;
     }
 
 }

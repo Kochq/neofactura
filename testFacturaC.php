@@ -87,30 +87,25 @@ try {
         "codAut": ' . $result['cae'] . '
     }';
 
-<<<<<<< HEAD
-    $generator = new HTMLTicket($ticket, $config, $qrJson);
-    
-=======
->>>>>>> 41709406583532ca9dc273e8c32ceabcb7cfbde9
     $fecha = date('d-m-Y-H-i-s');
     $logo_path = "/home/koch/Workspace/fusionDevs/neofactura/assets/cuadrado.png";
 
-    if($tipoPdf == "grande") {
-        error_log("ASDASDAS: ".$ticket['importeTotal']);
-        $nombreDelArchivo = "factura_$fecha.pdf";
-        $generator = new PDFVoucher($json, $config);
+    
+    $nombreDelArchivo = "factura_$fecha.pdf";
+    $generator = new PDFVoucher($json, $config);
+    $pdfFactura = $generator->emitirPDF($nombreDelArchivo, $logo_path);
 
-        $pdf = $generator->emitirPDF($nombreDelArchivo, $logo_path);
-    } else if($tipoPdf == "ticket") {
-        error_log("ASDASDAS: ".$ticket['importeTotal']);
-        $nombreDelArchivo = "ticket_$fecha.pdf";
-        $generator = new HTMLTicket($ticket, $config, $qrJson);
+    $nombreDelArchivo = "ticket_$fecha.pdf";
+    $generator = new HTMLTicket($ticket, $config, $qrJson);
+    $pdfTicket = $generator->generateHTML($nombreDelArchivo);
 
-        $pdf = $generator->generateHTML($nombreDelArchivo);
-    }
+    
+
+    $pdf = $pdfFactura . $pdfTicket;
+
 
     http_response_code(200);
-    echo $pdf;
+    
     header('Content-Length: ' . strlen($pdf));
 
 } catch (Exception $e) {

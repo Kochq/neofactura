@@ -23,7 +23,7 @@ $json = json_decode(file_get_contents('php://input'), true);
 $jwtCookie = $headers['Authorization'];
 $token = explode(" ", $jwtCookie)[1];
 
-$tipoPdf = $_GET['pdf'];
+
 $key = $_ENV['KEY'];
 $key = base64_decode($key);
 

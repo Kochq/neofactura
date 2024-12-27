@@ -41,7 +41,7 @@ try {
     $pdf = new PDFVoucher($json, $config);
     $logo_path = "/assets/cuadrado.png";
     $pdf->emitirPDF($logo_path);
-    $pdf->output("C:\Users\Asus\Desktop\FusionDevs\acturasPrueba\prueba15.pdf", "F"); // ("path/to/pdf", "F") para que lo cree en un archivo en el server
+    $pdf->output("C:\Users\Asus\Desktop\FusionDevs\acturasPrueba\documento.pdf", "F"); // ("path/to/pdf", "F") para que lo cree en un archivo en el server
     print_r($result);
 } catch (Exception $e) {
     echo 'Falló la ejecución: ' . $e->getMessage();

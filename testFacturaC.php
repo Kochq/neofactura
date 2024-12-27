@@ -34,10 +34,10 @@ $json["fechaHasta"] = $fecha;
 $json["fechaVtoPago"] = $fecha;
 
 $config = [
-    "TRADE_SOCIAL_REASON" => "EMPRESA SRL",
+    "TRADE_SOCIAL_REASON" => "CUARTA GENERACION",
     "TRADE_CUIT" => "20463482056",
-    "TRADE_ADDRESS" => "Calle 123",
-    "TRADE_TAX_CONDITION" => "No pago iva",
+    "TRADE_ADDRESS" => "P. Aparicio 125",
+    "TRADE_TAX_CONDITION" => "MONOTRIBUTISTA",
     "TRADE_INIT_ACTIVITY" => "05/11/2024",
     "VOUCHER_OBSERVATION" => ""
 ];
@@ -53,7 +53,7 @@ $nroDocRec = $json['numeroDocumento'];
 
 $ticket = [
     'letra' => 'C',
-    'codigoTipoComprobante' => $json['numeroComprobante'],
+    'codigoTipoComprobante' => $json['codigoTipoComprobante'],
     'numeroPuntoVenta' => $json['numeroPuntoVenta'],
     'numeroComprobante' => $json['numeroComprobante'],
     'fechaComprobante' => $json['fechaComprobante'],
@@ -70,7 +70,7 @@ try {
     $result = $afip->emitirComprobante($json);
     $json["cae"] = $result["cae"];
     $ticket['cae'] = $result["cae"];
-    $config['TRADE_IIBB'] = "12345432";
+    $config['TRADE_IIBB'] = "20463482056";
 
 
 
@@ -91,7 +91,7 @@ try {
     }';
 
     $generator = new HTMLTicket($ticket, $config, $qrJson);
-
+    
     $fecha = date('d-m-Y-H-i-s');
 
     $nombreDelArchivo = "ticket_$fecha.pdf";

@@ -36,7 +36,7 @@ class HTMLTicket {
         $html .= $this->getFooterInfo();
         $html .= $this->getHTMLFooter();
         $height = $this->calculateDynamicHeight($html);
-
+        
         // Crear un nuevo documento con formato personalizado
         $pdf = new TCPDF('P', 'mm', array(79.5, $height)); // Ancho 80 mm y altura inicial de 150 mm (ajustable)
 
@@ -159,21 +159,33 @@ class HTMLTicket {
      * Generates items table
      */
     private function getItemsTable() {
+        
         $html = '<tr>
             <td class="border-top padding-t-3 padding-b-3">
                 <div>
-                    <table>';
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Cantidad</th>
+                                <th>P. Unitario</th>
+                                <th>Importe</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
         
         foreach ($this->ticket['items'] as $index => $item) {
+            $precioSinDescuento = $item['importeItem'] + $item['impBonif'];
             $html .= '<tr>
-                <td>' . ($index + 1) . '</td>
                 <td>' . htmlspecialchars($item['descripcion']) . '</td>
-                <td>' . number_format($item['alic'], 0) . '%</td>
-                <td>' . number_format($item['importeItem'], 2, ',', '.') . '</td>
+                <td>' . $item['cantidad'] . '</td>
+                <td>' . number_format($item['precioUnitario'], 2, ',', '.') . '</td>
+                <td>' . number_format($precioSinDescuento, 2, ',', '.') . '</td>
             </tr>';
         }
         
-        $html .= '</table>
+        $html .= '</tbody>
+                    </table>
                 </div>
             </td>
         </tr>';
@@ -185,20 +197,35 @@ class HTMLTicket {
      * Generates total section
      */
     private function getTotalSection() {
+        // Calcula el descuento total sumando todos los descuentos de los items
+        $descuentoTotal = array_reduce($this->ticket['items'], function($carry, $item) {
+            return $carry + $item['impBonif'];
+        }, 0);
+    
+        // Calcula el SubTotal como la suma del importe total y el descuento total
+        $subTotal = $this->ticket['importeTotal'] + $descuentoTotal;
+    
         return '<tr>
             <td class="border-top padding-t-3 padding-b-3">
                 <div>
-                    <table>
+                    <table style="width: 95%;">
                         <tr>
-                            <td>TOTAL</td>
-                            <td>' . number_format($this->ticket['importeTotal'], 2, ',', '.') . '</td>
+                            <td style="text-align: left;">SubTotal</td>
+                            <td style="text-align: right;">' . number_format($subTotal, 2, ',', '.') . '</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Descuento</td>
+                            <td style="text-align: right;">' . number_format($descuentoTotal, 2, ',', '.') . '</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">TOTAL</td>
+                            <td style="text-align: right;">' . number_format($this->ticket['importeTotal'], 2, ',', '.') . '</td>
                         </tr>
                     </table>
                 </div>
             </td>
         </tr>';
     }
-
     /**
      * Generates footer information
      */

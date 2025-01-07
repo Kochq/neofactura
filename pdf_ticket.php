@@ -96,7 +96,7 @@ class HTMLTicket {
                     text-align: right;
                 }
                 .border-top {
-                    border-top: 1px dashed;
+                    border-top: 1px dotted #000;
                 }
                 .padding-b-3 {
                     padding-bottom: 3px;
